@@ -259,7 +259,7 @@ export default {
                 },
                  orderDetailsWithout: {
                      user: this.$store.state.currentUser,
-                     cart: this.$store.state.cart,n
+                     cart: this.$store.state.cart,
                      status: 'ORDERED',
                      email: this.$store.state.currentUser.email
                 },
