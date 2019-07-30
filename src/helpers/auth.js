@@ -2,7 +2,7 @@
  
 export function login(credentials){
 	return new Promise((res,rej)=>{
-		axios.post("https://meeks-clothing-shop.herokuapp.com/user/login",credentials)
+		axios.post("http://localhost/user/login",credentials)
 		.then((response)=>{
 			res(response.data)
 		})
