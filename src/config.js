@@ -1,5 +1,5 @@
 
-export const apiDomain = 'http://localhost:3000/'
+export const apiDomain = 'https://raybaba.com.ng/'
 //export const logoutUrl = apiDomain + 'api/logout'
 //export const loginUrl = apiDomain + 'api/login'
 export const regUrl = apiDomain + 'user/admin-signup'

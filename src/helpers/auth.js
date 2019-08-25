@@ -2,7 +2,7 @@
  
 export function login(credentials){
 	return new Promise((res,rej)=>{
-		axios.post("http://localhost/user/login",credentials)
+		axios.post("https://raybaba.com.ng/user/login",credentials)
 		.then((response)=>{
 			res(response.data)
 		})
