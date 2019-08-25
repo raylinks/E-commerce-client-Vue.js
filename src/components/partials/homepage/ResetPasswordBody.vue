@@ -87,7 +87,7 @@ export default {
                 }
             },
             resend(){
-                this.$http.post('http://localhost:3000/user/resend',{email: this.adminData.email})
+                this.$http.post('http://raybaba.com.ng/user/resend',{email: this.adminData.email})
                 .then(data => {
                        alert('    We sent a verification email to you. Please check your email to confirm your account and complete your account creation process.')
                         })
