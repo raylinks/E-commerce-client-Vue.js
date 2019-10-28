@@ -9,9 +9,9 @@
 
 
                         <div class="dropdown compare-dropdown">
-                            <a href="/order-history">
+                            <router-link to="/order-history">
                                 <i class="icon-retweet"></i>Order History
-                            </a>
+                            </router-link>
 
                         
                         </div><!-- End .dropdown -->

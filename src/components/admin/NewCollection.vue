@@ -125,9 +125,9 @@ export default {
       },
       add() {
           this.$http.post(addGroups, this.details, {
-              headers:{
-						"Authorization":"Bearer "+ this.$store.state.currentUser.token 
-					}
+            //   headers:{
+			// 			"Authorization":"Bearer "+ this.$store.state.currentUser.token 
+			// 		}
           }).then(response =>{
               this.submitted = true;
               this.details = ""

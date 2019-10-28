@@ -161,7 +161,7 @@ export default {
         return {
                 name: "",
                 groupId: '',
-                categoryId: '',
+                categoryId: '5db56d7cd4163e800fc294c9',
                 quantity: "",
                 price: "",
                 description: "",
