@@ -1,5 +1,5 @@
 
-export const apiDomain = 'https://ray-ecomerce.herokuapp.com/'
+export const apiDomain = process.env.ENVIRONMENT == 'production' ? 'https://ray-ecomerce.herokuapp.com/' : 'http://localhost:8080/';
 //export const logoutUrl = apiDomain + 'api/logout'
 //export const loginUrl = apiDomain + 'api/login'
 export const regUrl = apiDomain + 'user/admin-signup'
