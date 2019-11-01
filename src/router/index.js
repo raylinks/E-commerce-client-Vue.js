@@ -17,9 +17,12 @@ import Login from '../components/admin/Login.vue'
 import Register from '../components/admin/Register.vue'
 import ResetPassword from '../components/admin/ResetPassword.vue'
 import Profile from '../components/admin/Profile.vue'
+import ViewProducts from '../components/admin/ViewProducts.vue'
 import Order from '../components/admin/Order.vue'
 import OrderById from '../components/admin/OrderById.vue'
 import AddCollections from '../components/admin/NewCollection.vue'
+import ViewCategories from '../components/admin/ViewCategories.vue'
+import ViewGroups from '../components/admin/ViewGroups.vue'
 import AddCategories from '../components/admin/NewCategories.vue'
 import AddProduct from '../components/admin/Product.vue'
 import Error from '../components/NotFound.vue'
@@ -62,6 +65,14 @@ const router  = new VueRouter({
                   guest: true
               }
           },
+          {
+            path: '/all-categories',
+            name: 'viewcategories',
+            component: ViewCategories,
+            meta: {
+                guest: false
+            }
+        },
           
           {
             path: '/order-cancelled',
@@ -69,6 +80,22 @@ const router  = new VueRouter({
             component: CancelOrder,
             meta: {
                 guest: true
+            }
+        },
+        {
+            path: '/admin-all-products',
+            name: 'all-products',
+            component: ViewProducts,
+            meta: {
+                guest: false
+            }
+        },
+        {
+            path: '/admin-all-groups',
+            name: 'all-group',
+            component: ViewGroups,
+            meta: {
+                guest: false
             }
         },
           {

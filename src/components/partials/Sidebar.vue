@@ -19,12 +19,15 @@
             </li>
             <li class="menu_sub">
                 <router-link to="/add-collections"> <i class="fa fa-pie-chart"></i>Add Collections</router-link>
+                <router-link to="/admin-all-groups"> <i class="fa fa-pie-chart"></i>View All  Collections</router-link>
             </li>
              <li class="menu_sub">
                 <router-link to="/add-categories"> <i class="fa fa-pie-chart"></i>Add Categories</router-link>
+                 <router-link to="/all-categories"> <i class="fa fa-pie-chart"></i>View all Categories</router-link>
             </li>
              <li class="menu_sub">
                 <router-link to="/add-products"> <i class="fa fa-pie-chart"></i>Add Products</router-link>
+                  <router-link to="/admin-all-products"> <i class="fa fa-pie-chart"></i>View all Products</router-link>
             </li>
 
               <li class="menu_sub">
