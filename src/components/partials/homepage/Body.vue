@@ -1,6 +1,6 @@
 <template>
     <div>
-        
+
             <main class="main">
                 <div class="home-top-container">
                     <div class="container">
@@ -148,44 +148,52 @@
 
                 <div class="featured-section">
                     <div class="container">
-                        <h2 class="carousel-title">Featured Products</h2>
+                        <h2 class="carousel-title poppins-font">Featured Products</h2>
 
-                        <div class="featured-products owl-carousel owl-theme owl-dots-top">
-                            <div class="product" v-for="product in products.productArray">
+
+                        <div class="featured-productss">
+
+                          <swiper :options="swiperOption">
+                            <swiper-slide v-for="(product,index) in products.productArray" :key="index">
+                              <div class="product">
                                 <figure class="product-image-container">
-                                    <a :href="`/product/${product._id}`" class="product-image">
-                                        <img :src="product.image" alt="product" width="244px" height="270px">
-                                    </a>
-                                    <a :href="`/product/${product._id}`" class="btn-quickview">Quick View</a>
+                                  <a :href="`/product/${product._id}`" class="product-image">
+                                    <img :src="product.image" alt="product" width="244px" height="270px">
+                                  </a>
+                                  <a :href="`/product/${product._id}`" class="btn-quickview">Quick View</a>
                                 </figure>
                                 <div class="product-details">
-                                    <div class="ratings-container">
-                                        <div class="product-ratings">
-                                            <span class="ratings" style="width:80%"></span><!-- End .ratings -->
-                                        </div><!-- End .product-ratings -->
-                                    </div><!-- End .product-container -->
-                                    <h2 class="product-title">
-                                        <a :href="`/product/${product._id}`">{{ product.name }}</a>
-                                    </h2>
-                                    <div class="price-box">
-                                        <span class="product-price">N{{ product.price }}</span>
-                                    </div><!-- End .price-box -->
+                                  <div class="ratings-container">
+                                    <div class="product-ratings">
+                                      <span class="ratings" style="width:80%"></span><!-- End .ratings -->
+                                    </div><!-- End .product-ratings -->
+                                  </div><!-- End .product-container -->
+                                  <h2 class="product-title">
+                                    <a :href="`/product/${product._id}`">{{ product.name }}</a>
+                                  </h2>
+                                  <div class="price-box">
+                                    <span class="product-price">₦{{ product.price }}</span>
+                                  </div><!-- End .price-box -->
 
-                                    <div class="product-action">
-                                       
+                                  <div class="product-action">
 
-                                        <!-- <router class="paction add-cart" @click="addToCart(product)">Add to Cart</router>
-                                       -->
-                                       <!-- <input @click.prevent="addToCart(product)" type="submit" class="btn btn-primary"  disabled="product.quantity === 0" value="Add to CART">
-                                        -->
-                                        <a @click="addToCart(product)" class="paction add-cart" title="Add to Cart" disabled="product.quantity === 0">
-                                            <span>Add to Cart</span>
-                                        </a>
 
-                                        
-                                    </div><!-- End .product-action -->
+                                    <!-- <router class="paction add-cart" @click="addToCart(product)">Add to Cart</router>
+                                   -->
+                                    <!-- <input @click.prevent="addToCart(product)" type="submit" class="btn btn-primary"  disabled="product.quantity === 0" value="Add to CART">
+                                     -->
+                                    <a @click="addToCart(product)" class="paction add-cart cursor-pointer" title="Add to Cart" disabled="product.quantity === 0">
+                                      <span>Add to Cart</span>
+                                    </a>
+
+
+                                  </div><!-- End .product-action -->
                                 </div><!-- End .product-details -->
-                            </div><!-- End .product -->
+                              </div><!-- End .product -->
+                            </swiper-slide>
+                          </swiper>
+
+
 
                         </div><!-- End .featured-proucts -->
                     </div><!-- End .container -->
@@ -195,16 +203,39 @@
 </template>
 <script>
  import Sidebar from "../../partials/homepage/Sidebar.vue";
- import { getProducts } from '../../../config'
+ import { getProducts } from '../../../config';
+ import 'swiper/dist/css/swiper.css';
+ import { swiper, swiperSlide } from 'vue-awesome-swiper'
+
 export default {
     data() {
         return {
             products: {},
-            errors: {}
+            errors: {},
+            swiperOption: {
+              slidesPerView: 3,
+	            spaceBetween: 30,
+	            autoplay: {
+		            delay: 1000,
+		            disableOnInteraction: false
+	            },
+              breakpoints: {
+	              640: {
+		              slidesPerView: 2,
+		              spaceBetween: 20
+	              },
+	              320: {
+		              slidesPerView: 1,
+		              spaceBetween: 10
+	              }
+              }
+            }
         }
     },
     components: {
-          'app-sidebar': Sidebar 
+          'app-sidebar': Sidebar,
+            swiper,
+            swiperSlide
       },
 
     created () {
@@ -212,9 +243,10 @@ export default {
     },
     methods: {
         getProducts() {
+        	  let vm =this;
             this.$http.get(getProducts)
             .then(response => {
-                this.products = response.data
+                this.products = response.data;
             })
             .catch(err => {
                 this.errors = err.data
@@ -238,7 +270,7 @@ export default {
                 this.$store.commit('setCart', item);
                 //convert javascript object to string
                 localStorage.setItem('cart', JSON.stringify(cart));
-                this.$router.push({path: '/cart'});
+                window.location.href = "/cart";
             }else{
                 //if it is not a new addition to cart, get the item id that exist already
                 let item = cart.find(item => {
@@ -251,7 +283,7 @@ export default {
                     this.$store.commit('setQuantity', item);
                     this.$store.commit('setPrice', item);
                     localStorage.setItem('cart', JSON.stringify(cart));
-                    this.$router.push({path: '/cart'});
+	                  window.location.href = "/cart";
                 }else{
                     let item = {
                         id: product._id,
@@ -264,10 +296,25 @@ export default {
                     cart.push(item);
                     this.$store.commit('setCart', item);
                     localStorage.setItem('cart', JSON.stringify(cart));
-                    this.$router.push({path: '/cart'});
+	                  window.location.href = "/cart";
                 }
             }
-        }
+        },
     }
 }
 </script>
+
+<style scoped>
+  .product .product-title, .product .price-box, .product .price-box, .product .add-cart {
+    font-family: Poppins, sans-serif;
+  }
+
+  .product img{
+    object-fit: cover;
+    height: 243px !important;
+  }
+
+  .product-image-container{
+    background-color: transparent !important;
+  }
+</style>

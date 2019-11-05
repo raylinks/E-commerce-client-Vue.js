@@ -1,19 +1,19 @@
 <template>
     <div>
       <main class="main">
-            <nav aria-label="breadcrumb" class="breadcrumb-nav">
-                <div class="container">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="/home"><i class="icon-home"></i></a></li>
-                    </ol>
-                </div><!-- End .container -->
+            <nav aria-label="breadcrumb" class="breadcrumb-nav pb-3">
+              <div class="container">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item ml-0"><a href="/" style="font-size: 16px"><i class="icon-chevron-left" style="font-size: medium"></i> <span style="padding-top: 20px">Go back</span></a></li>
+                </ol>
+              </div><!-- End .container -->
             </nav>
 
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-9 order-lg-last dashboard-content">
+                    <div class="col-lg-6 offset-lg-3 col-md-6 offset-md-3 col-sm-8 offset-sm-2 order-lg-last dashboard-content">
                         <h2>Register</h2>
-                       
+
                                 <div class="form-group" >
                                  <div class="alert alert-warning alert-dismissible fade show" role="alert" v-if="errors.msg">
 		            			{{ errors.msg }}<br/>
@@ -22,7 +22,7 @@
 		            			</button>
 
 		            		</div>
-                                </div> 
+                                </div>
                                  <div class="alert alert-success" v-if="success">
                                    <button class="close" type="button" data-dismiss="alert" aria-hidden="true">&#215;</button>
                                    We sent a verification email to {{ userData.email }}.<br/>
@@ -30,8 +30,8 @@
                                    <a @click="resend">Didn't get the email? Resend it</a>
                                </div>
                         <form @submit.prevent="signup">
-                           
-                           
+
+
                             <div class="form-group required-field">
                                 <label for="acc-email">Full Name</label>
                                  <input type="text" v-model="userData.full_name" class="form-control" name="full_name"  >
@@ -52,22 +52,22 @@
                                  <input type="text" v-model="userData.country" class="form-control" name="country" >
                             </div><!-- End .form-group -->
 
-                            
+
                             <div class="form-group required-field">
                                 <label for="acc-password">State</label>
                                  <input type="text" v-model="userData.state" class="form-control" name="state" >
                             </div><!-- End .form-group -->
-                            
+
                             <div class="form-group required-field">
                                 <label for="acc-password">City</label>
                                  <input type="text" v-model="userData.city" class="form-control" name="city" >
                             </div><!-- End .form-group -->
-                            
+
                             <div class="form-group required-field">
                                 <label for="acc-password">Address</label>
                            <textarea cols="30" rows="5" id="bodyMessage" class="form-control" v-model="userData.address" name="address"></textarea>
                                  </div><!-- End .form-group -->
-                            
+
                             <div class="form-group required-field">
                                 <label for="acc-password">Phone</label>
                                  <input type="text" v-model="userData.phone" class="form-control" name="phone" >
@@ -86,7 +86,7 @@
                                 </div>
                             </div><!-- End .form-footer -->
                         </form>
-                      
+
                     </div><!-- End .col-lg-9 -->
 
                 </div><!-- End .row -->
@@ -98,7 +98,7 @@
 </template>
 <style lang="css" scoped>
     .bg-white{
-      color: red;  
+      color: red;
     }
     .error {
   margin: 0px;
@@ -158,7 +158,7 @@ export default {
                     });
             }
         }
-     
+
 }
 </script>
 

@@ -1,0 +1,21 @@
+@import url(https://fonts.googleapis.com/css?family=Poppins:400,500,600,700);
+
+body{
+  font-family: Poppins, sans-serif !important;
+}
+
+.poppins-font{
+  font-family: Poppins, sans-serif !important;
+}
+
+.cursor-pointer{
+  cursor: pointer !important;
+}
+
+.text-bold{
+  font-weight: bold !important;
+}
+
+.text-black{
+  color: #000 !important;
+}

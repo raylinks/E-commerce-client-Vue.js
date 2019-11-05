@@ -1,7 +1,7 @@
 <template>
  <div class="">
    <router-view></router-view>
-   
+
  </div><!-- End .page-wrapper -->
 </template>
 
@@ -14,7 +14,7 @@ export default {
       msg: 'Welcome to Your Vue.js App'
     }
   },
- 
+
    created: function () {
     this.$http.interceptors.response.use(undefined, function (err) {
       return new Promise(function (resolve, reject) {
@@ -30,7 +30,6 @@ export default {
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

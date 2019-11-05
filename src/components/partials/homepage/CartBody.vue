@@ -1,13 +1,12 @@
 <template>
     <div>
         <main class="main">
-            <nav aria-label="breadcrumb" class="breadcrumb-nav">
-                <div class="container">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="/"><i class="icon-home"></i></a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Shopping Cart</li>
-                    </ol>
-                </div><!-- End .container -->
+            <nav aria-label="breadcrumb" class="breadcrumb-nav pb-3">
+              <div class="container">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item ml-0"><a href="/" style="font-size: 16px"><i class="icon-chevron-left" style="font-size: medium"></i> <span style="padding-top: 20px">Go back</span></a></li>
+                </ol>
+              </div><!-- End .container -->
             </nav>
 
             <div class="container" v-if="cartCount.length > 0">
@@ -18,10 +17,10 @@
                                 <thead>
 
                                     <tr>
-                                        <th class="product-col">Product</th>
-                                        <th class="price-col">Price</th>
-                                        <th class="qty-col">Qty</th>
-                                        <th>Subtotal</th>
+                                        <th class="product-col text-black">Product</th>
+                                        <th class="price-col text-black">Price</th>
+                                        <th class="qty-col text-black">Qty</th>
+                                        <th class="text-black">Subtotal</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -33,32 +32,31 @@
                                                 </a>
                                             </figure>
                                             <h2 class="product-title">
-                                                <a href="">{{ item.name }}</a>
+                                                <a href="" class="text-bold text-black">{{ item.name }}</a>
                                             </h2>
                                         </td>
-                                        <td>N{{ item.price }}</td>
+                                        <td class="text-bold text-black">₦{{ item.price }}</td>
                                         <td>
-                                            <span class="vertical-quantity form-control">{{ item.qty }}</span>
-                                            <button @click="increment(item)">+</button>
-                                             <button @click="decrement(item)" >-</button>
-                                            <!-- <input class="vertical-quantity form-control" type="text"> -->
+
+                                          <input class="vertical-quantity form-control" type="text">
+
                                         </td>
-                                        <td>N{{ item.subtotal }}</td>
+                                        <td class="text-bold text-black">₦{{ item.subtotal }}</td>
                                     </tr>
-                                    <tr class="product-action-row">
+                                    <!--<tr class="product-action-row">
                                         <td colspan="4" class="clearfix">
                                             <div class="float-left">
                                                 <a href="#" class="btn-move">Move to Wishlist</a>
-                                            </div><!-- End .float-left -->
-                                            
+                                            </div>&lt;!&ndash; End .float-left &ndash;&gt;
+
                                             <div class="float-right">
                                                 <a href="#" title="Edit product" class="btn-edit"><span class="sr-only">Edit</span><i class="icon-pencil"></i></a>
                                                 <a href="#" title="Remove product" class="btn-remove"><span class="sr-only">Remove</span></a>
-                                            </div><!-- End .float-right -->
+                                            </div>&lt;!&ndash; End .float-right &ndash;&gt;
                                         </td>
-                                    </tr>
+                                    </tr>-->
 
-                                   
+
                                 </tbody>
 
                                 <tfoot>
@@ -80,7 +78,7 @@
 
                         <div class="cart-discount">
                             <h4>Apply Discount Code</h4>
-                           
+
                             <form action="#">
                                 <div class="input-group">
                                     <input type="text" class="form-control form-control-sm" placeholder="Enter discount code"  required>
@@ -105,18 +103,18 @@
                                 <tbody>
                                     <tr>
                                         <td>Subtotal</td>
-                                        <td>N{{ total }}</td>
+                                        <td class="text-bold text-black">₦{{ total }}</td>
                                     </tr>
 
                                     <tr>
                                         <td>Tax</td>
-                                        <td>N0.00</td>
+                                        <td>₦0.00</td>
                                     </tr>
                                 </tbody>
                                 <tfoot>
                                     <tr>
                                         <td>Order Total</td>
-                                        <td>N{{ total }}</td>
+                                        <td>₦{{ total }}</td>
                                     </tr>
                                 </tfoot>
                             </table>
@@ -129,8 +127,8 @@
                 </div><!-- End .row -->
             </div><!-- End .container -->
 
-             <div class="container" v-if="cartCount.length < 1">
-               <a :href="`/home`"><img src="/static/images/cart.jpg"></a>
+             <div class="container p-5" v-if="cartCount.length < 1">
+                 <a href="/home"><img style="margin: auto" src="/static/images/cart.jpg"></a>
             </div><!-- End .container -->
 
             <div class="mb-6"></div><!-- margin -->
@@ -153,7 +151,7 @@ export default {
     },
      computed : {
       cartCount : function(){ return this.$store.getters.getCart},
-      total () { 
+      total () {
                let cart = JSON.parse(localStorage.getItem('cart')) || [];
             //for new addition to cart
             if(cart.length > 0){
@@ -213,7 +211,7 @@ export default {
             }else{
                 let retrievedItem = cart.find(retrievedItem => {
                     return retrievedItem.id === item.id;
-                }); 
+                });
                  if(retrievedItem){
                     retrievedItem.qty++;
                     retrievedItem.subtotal = retrievedItem.price * retrievedItem.qty
@@ -231,17 +229,17 @@ export default {
                     image: product.image
                 }
             }
-           
+
             }
         },
         decrement(item){
                 let cart = JSON.parse(localStorage.getItem('cart')) || [];
             //for new addition to cart
             //check if cart is empty
-            
+
                 let retrievedItem = cart.find(retrievedItem => {
                     return retrievedItem.id === item.id;
-                }); 
+                });
                  if(retrievedItem){
                     retrievedItem.qty = retrievedItem.qty - 1 ;
                     retrievedItem.subtotal = retrievedItem.price * retrievedItem.qty
@@ -262,7 +260,7 @@ export default {
                         localStorage.setItem('cart', JSON.stringify(this.cartCount));
                         break;
                     }
-            
+
                 }
         },
 
@@ -271,11 +269,17 @@ export default {
       clearCart: function () {
         this.$store.dispatch('clearCart')
         .then(() => {
-         window.reload = '/'
+         window.location.reload();
         })
       }
-      
+
     }
 }
 
 </script>
+
+<style scoped>
+  .btn-clear-cart:hover{
+    color: #FFF !important;
+  }
+</style>

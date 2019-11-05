@@ -13,20 +13,20 @@
                                 <i class="icon-retweet"></i>Order History
                             </router-link>
 
-                        
+
                         </div><!-- End .dropdown -->
                     </div><!-- End .header-left -->
 
                     <div class="header-right">
-                         <p class="welcome-msg">Welcome to Meeks Clothing! </p>
+                         <p class="welcome-msg">Welcome{{ isLoggedIn ? " to " + isLoggedIn.full_name : "" }}! </p>
                         <li><router-link to="/contact" class="login-link">CONTACT</router-link></li>
                         <div class="header-dropdown dropdown-expanded">
                             <li v-if="isLoggedIn"><span>{{ this.$store.getters.currentUser.full_name  }}</span></li>
                             <li v-if="isLoggedIn"><a @click="logout">Logout</a></li>
                             <li v-else><router-link to="/auth/login">LOG IN</router-link></li>
-                            
-                          
-                           
+
+
+
                         </div><!-- End .header-dropown -->
                     </div><!-- End .header-right -->
                 </div><!-- End .container -->
@@ -74,7 +74,7 @@
                                 <div class="dropdownmenu-wrapper">
                                     <div class="dropdown-cart-header">
                                         <span>{{ cartCount.length }} Items</span>
-                                        <router-link to="/cart"> <i class="fa fa-pie-chart"></i>View Cart</router-link>
+                                        <a href="/cart"> <i class="fa fa-pie-chart"></i>View Cart</a>
                                    </div><!-- End .dropdown-cart-header -->
                                     <div class="dropdown-cart-products">
                                         <div class="product" v-for="(cart, index) in cartCount" :key="cart.id">
@@ -117,7 +117,7 @@
             <div class="sticky-wrapper" style="">
                 <div class="header-bottom sticky-header">
                 <div class="container">
-                        
+
                     <div class="dropdown cart-dropdown">
                             <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
                                 <span class="cart-count">{{ cartCount.length }}</span>
@@ -165,10 +165,10 @@
                         </div>
                     <nav class="main-nav">
                         <ul class="menu sf-arrows sf-js-enabled" style="touch-action: pan-y;">
-                            <li class="active"><a href="/home">Home</a></li>
-                           <li class=""><a href="/account/register">Register</a></li>
-                           <li class=""><a href="/auth/login">Login</a></li>
-                             <li class=""><a href="/contact">Contact</a></li>
+                            <li :class="this.$route.path === '/home' ? 'active' : ''"><a href="/home">Home</a></li>
+                           <li :class="this.$route.path === '/account/register' ? 'active' : ''"><a href="/account/register">Register</a></li>
+                           <li :class="this.$route.path === '/auth/login' ? 'active' : ''"><a href="/auth/login">Login</a></li>
+                             <li :class="this.$route.path === '/contact' ? 'active' : ''"><a href="/contact">Contact</a></li>
                             <!--<li class="float-right"><a href="/auth/login">Login</a></li>
                             <li class="float-right"><a href="/contact">Contact</a></li> -->
                         </ul>
@@ -192,7 +192,7 @@ export default {
      computed : {
       isLoggedIn : function(){ return this.$store.getters.currentUser},
       cartCount : function(){ return this.$store.getters.getCart},
-      total () { 
+      total () {
           let cart = JSON.parse(localStorage.getItem('cart')) || [];
             //for new addition to cart
             if(cart.length > 0){
@@ -225,8 +225,17 @@ export default {
          alert('Item deleted')
       }
 }
-     
-   
+
+
 }
 </script>
+
+<style scoped>
+  .main-nav .menu li a{
+    letter-spacing: 1px;
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+
+</style>
 

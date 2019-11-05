@@ -13,7 +13,7 @@
                 <div class="row">
                     <div class="col-lg-9 order-lg-last dashboard-content">
                         <h2>Admin Register</h2>
-                       
+
                                 <div class="form-group" >
                                  <div class="alert alert-warning alert-dismissible fade show" role="alert" v-if="errors.msg">
 		            			{{ errors.msg }}<br/>
@@ -22,7 +22,7 @@
 		            			</button>
 
 		            		</div>
-                                </div> 
+                                </div>
                                  <div class="alert alert-success" v-if="success">
                                    <button class="close" type="button" data-dismiss="alert" aria-hidden="true">&#215;</button>
                                    We sent a verification email to {{ adminData.email }}.<br/>
@@ -30,7 +30,7 @@
                                    <a @click="resend">Didn't get the email? Resend it</a>
                                </div>
                         <form @submit.prevent="adminSignup">
-                                        
+
                             <div class="form-group required-field">
                                 <label for="acc-email">Full Name</label>
                                  <input type="text" v-model="adminData.full_name" class="form-control" name="full_name"  >
@@ -46,8 +46,8 @@
                                  <input type="password" v-model="adminData.password" class="form-control" name="password" >
                             </div><!-- End .form-group -->
 
-                          
-                            
+
+
                             <div class="form-group required-field">
                            <label for="acc-password">Are you Admin?</label>
                                 <select v-model="adminData.is_admin" class="form-control">
@@ -61,28 +61,28 @@
                                  <input type="text" v-model="adminData.country" class="form-control" name="country" >
                             </div><!-- End .form-group -->
 
-                            
+
                             <div class="form-group required-field">
                                 <label for="acc-password">State</label>
                                  <input type="text" v-model="adminData.state" class="form-control" name="state" >
                             </div><!-- End .form-group -->
-                            
+
                             <div class="form-group required-field">
                                 <label for="acc-password">City</label>
                                  <input type="text" v-model="adminData.city" class="form-control" name="city" >
                             </div><!-- End .form-group -->
-                            
+
                             <div class="form-group required-field">
                                 <label for="acc-password">Address</label>
                            <textarea cols="30" rows="5" id="bodyMessage" class="form-control" v-model="adminData.address" name="address"></textarea>
                                  </div><!-- End .form-group -->
-                            
+
                             <div class="form-group required-field">
                                 <label for="acc-password">Phone</label>
                                  <input type="text" v-model="adminData.phone" class="form-control" name="phone" >
                             </div><!-- End .form-group -->
 
-                            
+
 
                             <div class="mb-2"></div><!-- margin -->
 
@@ -97,7 +97,7 @@
                                 </div>
                             </div><!-- End .form-footer -->
                         </form>
-                      
+
                     </div><!-- End .col-lg-9 -->
 
                 </div><!-- End .row -->
@@ -109,7 +109,7 @@
 </template>
 <style lang="css" scoped>
     .bg-white{
-      color: red;  
+      color: red;
     }
     .error {
   margin: 0px;
@@ -172,7 +172,7 @@ export default {
                     });
             }
         }
-     
+
 }
 </script>
 

@@ -1,13 +1,11 @@
 <template>
     <div>
-        
+
         <main class="main">
-            <nav aria-label="breadcrumb" class="breadcrumb-nav">
+            <nav aria-label="breadcrumb" class="breadcrumb-nav pb-3">
                 <div class="container">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="/"><i class="icon-home"></i></a></li>
-                        <li class="breadcrumb-item"><a href="#">Electronics</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Headsets</li>
+                        <li class="breadcrumb-item"><a href="/" style="font-size: 16px"><i class="icon-chevron-left" style="font-size: medium"></i> <span style="padding-top: 20px">Go back</span></a></li>
                     </ol>
                 </div><!-- End .container -->
             </nav>
@@ -20,7 +18,7 @@
                                     <div class="product-slider-container product-item">
                                         <div class="product-single-carousel owl-carousel owl-theme">
                                             <div class="product-item">
-                                         
+
                                                 <img class="product-single-image" :src="product.image" data-zoom-image="assets/images/products/zoom/product-1-big.jpg"/>
                                             </div>
                                             <div class="product-item">
@@ -58,12 +56,9 @@
                                     <div class="product-single-details">
                                         <h1 class="product-title">{{ product.name }}</h1>
 
-                                        <div class="ratings-container">
-                                        </div><!-- End .product-container -->
-
                                         <div class="price-box">
-                                            <span class="old-price">N{{ product.price }}</span>
-                                            <span class="product-price">N{{ product.price }}</span>
+                                            <span class="old-price">₦{{ product.price }}</span>
+                                            <span class="product-price">₦{{ product.price }}</span>
                                         </div><!-- End .price-box -->
 
                                         <div class="product-desc">
@@ -80,7 +75,7 @@
                                                     <li>
                                                         <a href="#" style="background-color: #ab6e6e;"></a>
                                                     </li>
-                                                    
+
                                                 </ul>
                                             </div> -->
                                             <!-- End .product-single-filter -->
@@ -88,9 +83,9 @@
 
                                         <div class="product-action product-all-icons">
                                             <div class="product-single-qty">
-                                      
+
                                             </div><!-- End .product-single-qty -->
-                                            <a class="paction add-cart" @click="addToBucket(product)"><span>Add to Cart</span></a>
+                                            <a class="paction add-cart cursor-pointer" @click="addToBucket(product)"><span>Add to Cart</span></a>
                                         </div><!-- End .product-action -->
 
                                     </div><!-- End .product-single-details -->
@@ -111,7 +106,7 @@
                                     </div><!-- End .product-desc-content -->
                                 </div><!-- End .tab-pane -->
 
-                                
+
                             </div><!-- End .tab-content -->
                         </div><!-- End .product-single-tabs -->
                     </div><!-- End .col-lg-9 -->
@@ -150,89 +145,11 @@
                                     </a>
                                 </div><!-- End .banner -->
                             </div><!-- End .widget -->
-
-                            <div class="widget widget-featured">
-                                <h3 class="widget-title">Featured Products</h3>
-                                
-                                <div class="widget-body">
-                                    <div class="owl-carousel widget-featured-products">
-                                        <div class="featured-col" v-for="prod in products">
-                                            <div class="product product-sm">
-                                                <figure class="product-image-container">
-                                                    <a :href="`/product/${prod.productId}`" class="product-image">
-                                                        <img :src="prod.firstProductImage" alt="product">
-                                                    </a>
-                                                </figure>
-                                                <div class="product-details">
-                                                    <h2 class="product-title">
-                                                        <a :href="`/product/${prod.productId}`">{{ prod.firstProductName }}</a>
-                                                    </h2>
-                                                    <div class="ratings-container">
-                                                        <div class="product-ratings">
-                                                            <span class="ratings" style="width:80%"></span><!-- End .ratings -->
-                                                        </div><!-- End .product-ratings -->
-                                                    </div><!-- End .product-container -->
-                                                    <div class="price-box">
-                                                        <span class="product-price">N{{ prod.firstProductPrice }}</span>
-                                                    </div><!-- End .price-box -->
-                                                </div><!-- End .product-details -->
-                                            </div><!-- End .product -->
-                                            </div><!-- End .featured-col -->
-
-                                        <!-- <div class="featured-col">
-                                        
-                                            
-
-                                        </div> -->
-                                        <!-- End .featured-col -->
-                                    </div><!-- End .widget-featured-slider -->
-                                </div><!-- End .widget-body -->
-                            </div><!-- End .widget -->
                         </div>
                     </aside><!-- End .col-md-3 -->
                 </div><!-- End .row -->
             </div><!-- End .container -->
 
-            <div class="featured-section">
-                <div class="container">
-                    <h2 class="carousel-title">Featured Products</h2>
-
-                    <div class="featured-products owl-carousel owl-theme owl-dots-top">
-                        <div class="product" v-for="prod in products">
-                            <figure class="product-image-container">
-                                <a :href="`/product/${prod.productId}`" class="product-image">
-                                    <img :src="prod.firstProductImage" alt="product">
-                                </a>
-                                <a href="#" class="btn-quickview">Quick View</a>
-                            </figure>
-                            <div class="product-details">
-                                <div class="ratings-container">
-                                    <div class="product-ratings">
-                                        <span class="ratings" style="width:80%"></span><!-- End .ratings -->
-                                    </div><!-- End .product-ratings -->
-                                </div><!-- End .product-container -->
-                                <h2 class="product-title">
-                                    <a :href="`/product/${prod.productId}`">{{ prod.firstProductName }}</a>
-                                </h2>
-                                <div class="price-box">
-                                    <span class="product-price">N{{ prod.firstProductPrice }}</span>
-                                </div><!-- End .price-box -->
-
-                                <div class="product-action">
-                                    <a class="paction add-cart" @click="addToCart(prod)"><span>Add to Cart</span></a>
-                                  
-
-                                </div><!-- End .product-action -->
-                            </div><!-- End .product-details -->
-                        </div><!-- End .product -->
-
-                        
-
-                      
-
-                    </div><!-- End .featured-proucts -->
-                </div><!-- End .container -->
-            </div><!-- End .featured-section -->
         </main><!-- End .main -->
     </div>
 </template>
@@ -246,12 +163,12 @@ export default {
             product: {},
             products: {},
             errors: {}
-            
+
         }
     },
     computed : {
       cartCount : function(){ return this.$store.getters.getCart},
-      total () { 
+      total () {
                let cart = JSON.parse(localStorage.getItem('cart')) || [];
             //for new addition to cart
             if(cart.length > 0){
@@ -283,7 +200,7 @@ export default {
                 this.errors = err.data
             });
         },
-        
+
            addToCart(prod) {
             let cart = JSON.parse(localStorage.getItem('cart')) || [];
             //for new addition to cart
@@ -348,7 +265,7 @@ export default {
                 this.$store.commit('setCart', item);
                 //convert javascript object to string
                 localStorage.setItem('cart', JSON.stringify(cart));
-                this.$router.push({path: '/cart'});
+	              window.location.href = "/cart";
             }else{
                 //if it is not a new addition to cart, get the item id that exist already
                 let item = cart.find(item => {
@@ -361,7 +278,7 @@ export default {
                     this.$store.commit('setQuantity', item);
                     this.$store.commit('setPrice', item);
                     localStorage.setItem('cart', JSON.stringify(cart));
-                    this.$router.push({path: '/cart'});
+	                  window.location.href = "/cart";
                 }else{
                     let item = {
                         id: product._id,
@@ -374,11 +291,21 @@ export default {
                     cart.push(item);
                     this.$store.commit('setCart', item);
                     localStorage.setItem('cart', JSON.stringify(cart));
-                    this.$router.push({path: '/cart'});
+	                  window.location.href = "/cart";
                 }
             }
          }
-    
+
     }
 }
 </script>
+
+<style scoped>
+  .product-single-details .product-title, .product-single-details .product-box{
+    font-family: Poppins, sans-serif;
+  }
+
+  .paction.add-cart:hover{
+    color: white;
+  }
+</style>

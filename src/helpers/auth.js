@@ -1,8 +1,8 @@
  import axios from 'axios'
- 
+
 export function login(credentials){
 	return new Promise((res,rej)=>{
-		axios.post("http://localhost:3000/user/login",credentials)
+		axios.post("https://ray-ecomerce.herokuapp.com/user/login",credentials)
 		.then((response)=>{
 			res(response.data)
 		})
@@ -19,8 +19,8 @@ export function getLocalUser(){
 	}
 
     return JSON.parse(userStr);
-    
-    
-    
+
+
+
 }
 
