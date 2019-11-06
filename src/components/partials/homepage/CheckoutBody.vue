@@ -1,14 +1,13 @@
 <template>
     <div>
          <main class="main">
-            <nav aria-label="breadcrumb" class="breadcrumb-nav">
-                <div class="container">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="/"><i class="icon-home"></i></a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Checkout</li>
-                    </ol>
-                </div><!-- End .container -->
-            </nav>
+           <nav aria-label="breadcrumb" class="breadcrumb-nav pb-3">
+             <div class="container">
+               <ol class="breadcrumb">
+                 <li class="breadcrumb-item ml-0"><a href="/cart" style="font-size: 16px"><i class="icon-chevron-left" style="font-size: medium"></i> <span style="padding-top: 20px">Go back</span></a></li>
+               </ol>
+             </div><!-- End .container -->
+           </nav>
 
             <div class="container">
                 <ul class="checkout-progress-bar">
@@ -32,109 +31,190 @@
 		            			</button>
 
 		            		</div>
-                                <form  @submit.prevent="authenticate" v-show="!isLoggedIn">
-                                    <div class="form-group required-field">
-                                        <label>Email Address </label>
-                                        <div class="form-control-tooltip">
-                                            <input type="email" class="form-control" v-model="form.email" name="email">
-                                            <span class="input-tooltip" data-toggle="tooltip" title="We'll send your order confirmation here." data-placement="right"><i class="icon-question-circle"></i></span>
-                                        </div><!-- End .form-control-tooltip -->
-                                    </div><!-- End .form-group -->
+                              <template v-if="!isLoggedIn">
+                                <form  @submit.prevent="authenticate">
+                                  <div class="form-group required-field">
+                                    <label>Email Address </label>
+                                    <div class="form-control-tooltip">
+                                      <input type="email" class="form-control" v-model="form.email" name="email">
+                                      <span class="input-tooltip" data-toggle="tooltip" title="We'll send your order confirmation here." data-placement="right"><i class="icon-question-circle"></i></span>
+                                    </div><!-- End .form-control-tooltip -->
+                                  </div><!-- End .form-group -->
 
-                                    <div class="form-group required-field">
-                                        <label>Password </label>
-                                        <input type="password" class="form-control" v-model="form.password" name="password">
-                                    </div><!-- End .form-group -->
-                                    
-                                    <p>You already have an account with us. Sign in or continue as guest.</p>
-                                    <div class="form-footer">
-                                        <button type="submit" class="btn btn-primary">LOGIN</button>
-                                        <a href="" class="forget-pass"> Forgot your password?</a>
-                                    </div><!-- End .form-footer -->
+                                  <div class="form-group required-field">
+                                    <label>Password </label>
+                                    <input type="password" class="form-control" v-model="form.password" name="password">
+                                  </div><!-- End .form-group -->
+
+                                  <p>You already have an account with us. Sign in or continue as guest.</p>
+                                  <div class="form-footer">
+                                    <button type="submit" class="btn btn-primary">LOGIN</button>
+                                    <a href="" class="forget-pass"> Forgot your password?</a>
+                                  </div><!-- End .form-footer -->
                                 </form>
 
-
-
-                                 <div class="alert alert-success" v-if="success">
-                                   <button class="close" type="button" data-dismiss="alert" aria-hidden="true">&#215;</button>
-                                   We sent a verification email to {{ userData.email }}.<br/>
-                                   Please check your email to confirm your account and complete your account creation process.<br/>
-                                   <a @click="resend">Didn't get the email? Resend it</a>
-                               </div>
-
-                                 <div class="alert alert-warning alert-dismissible fade show" role="alert" v-if="errors.msg">
-		            			{{ errors.msg }}
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-		            			  <span aria-hidden="true">&times;</span>
-		            			</button>
+                                <div class="alert alert-success" v-if="success">
+                                  <button class="close" type="button" data-dismiss="alert" aria-hidden="true">&#215;</button>
+                                  We sent a verification email to {{ newUserData.email }}.<br/>
+                                  Please check your email to confirm your account and complete your account creation process.<br/>
+                                  <a @click="resend">Didn't get the email? Resend it</a>
                                 </div>
 
-                                
+                                <div class="alert alert-warning alert-dismissible fade show" role="alert" v-if="errors.msg">
+                                  {{ errors.msg }}
+                                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
 
-                                
+                                <form @submit.prevent="signup">
+                                  <div class="form-group required-field">
+                                    <label>Full Name </label>
+                                    <input type="text" class="form-control" name="full_name" v-model="newUserData.full_name">
+                                  </div><!-- End .form-group -->
 
-                                <form @submit.prevent="signup" v-show="!isLoggedIn">
-                                    <div class="form-group required-field">
-                                        <label>Full Name </label>
-                                        <input type="text" class="form-control" name="full_name" v-model="userData.full_name">
-                                    </div><!-- End .form-group -->
+                                  <div class="form-group required-field">
+                                    <label>Email Address </label>
+                                    <div class="form-control-tooltip">
+                                      <input type="email" class="form-control" v-model="newUserData.email" name="email">
+                                    </div><!-- End .form-control-tooltip -->
+                                  </div><!-- End .form-group -->
 
-                                      <div class="form-group required-field">
-                                        <label>Email Address </label>
-                                        <div class="form-control-tooltip">
-                                            <input type="email" class="form-control" v-model="userData.email" name="email">
-                                        </div><!-- End .form-control-tooltip -->
-                                    </div><!-- End .form-group -->
+                                  <div class="form-group required-field">
+                                    <label>Password </label>
+                                    <input type="password" class="form-control" v-model="newUserData.password" name="password">
+                                  </div><!-- End .form-group -->
 
-                                    <div class="form-group required-field">
-                                        <label>Password </label>
-                                        <input type="password" class="form-control" v-model="userData.password" name="password">
-                                    </div><!-- End .form-group -->
+                                  <div class="form-group required-field">
+                                    <label>Street Address </label>
+                                    <textarea cols="30" rows="5" id="bodyMessage" class="form-control" v-model="newUserData.address" name="address"></textarea>
+                                  </div><!-- End .form-group -->
 
-                                    <div class="form-group required-field">
-                                        <label>Street Address </label>
-                                <textarea cols="30" rows="5" id="bodyMessage" class="form-control" v-model="userData.address" name="address"></textarea>
-                                    </div><!-- End .form-group -->
+                                  <div class="form-group required-field">
+                                    <label>City  </label>
+                                    <input type="text" class="form-control" v-model="newUserData.city">
+                                  </div><!-- End .form-group -->
 
-                                    <div class="form-group required-field">
-                                        <label>City  </label>
-                                        <input type="text" class="form-control" v-model="userData.city">
-                                    </div><!-- End .form-group -->
+                                  <div class="form-group">
+                                    <label>State</label>
+                                    <div class="select-custom">
+                                      <select class="form-control" v-model="newUserData.state">
+                                        <option value="AB">Abia</option>
+                                        <option value="LG">Lagos</option>
+                                      </select>
+                                    </div><!-- End .select-custom -->
+                                  </div><!-- End .form-group -->
 
-                                    <div class="form-group">
-                                        <label>State</label>
-                                        <div class="select-custom">
-                                            <select class="form-control" v-model="userData.state">
-                                                <option value="AB">Abia</option>
-                                                <option value="LG">Lagos</option>
-                                            </select>
-                                        </div><!-- End .select-custom -->
-                                    </div><!-- End .form-group -->
+                                  <div class="form-group">
+                                    <label>Country</label>
+                                    <div class="select-custom">
+                                      <select class="form-control" v-model="newUserData.country">
+                                        <option value="USA">United States</option>
+                                        <option value="Turkey">Turkey</option>
+                                        <option value="China">China</option>
+                                        <option value="Germany">Germany</option>
+                                        <option value="Nigeria">Nigeria</option>
+                                      </select>
+                                    </div><!-- End .select-custom -->
+                                  </div><!-- End .form-group -->
 
-                                    <div class="form-group">
-                                        <label>Country</label>
-                                        <div class="select-custom">
-                                            <select class="form-control" v-model="userData.country">
-                                                <option value="USA">United States</option>
-                                                <option value="Turkey">Turkey</option>
-                                                <option value="China">China</option>
-                                                <option value="Germany">Germany</option>
-                                                 <option value="Nigeria">Nigeria</option>
-                                            </select>
-                                        </div><!-- End .select-custom -->
-                                    </div><!-- End .form-group -->
-
-                                    <div class="form-group required-field">
-                                        <label>Phone Number </label>
-                                        <div class="form-control-tooltip">
-                                            <input type="text" class="form-control" name="phone" v-model="userData.phone">
-                                            <span class="input-tooltip" data-toggle="tooltip" title="For delivery questions." data-placement="right"><i class="icon-question-circle"></i></span>
-                                        </div><!-- End .form-control-tooltip -->
-                                    </div><!-- End .form-group -->
-                                     <div class="text-center mb-4 mt-4">
-                                        <button type="submit" class="btn btn-primary">Register</button>
-                                    </div>
+                                  <div class="form-group required-field">
+                                    <label>Phone Number </label>
+                                    <div class="form-control-tooltip">
+                                      <input type="text" class="form-control" name="phone" v-model="newUserData.phone">
+                                      <span class="input-tooltip" data-toggle="tooltip" title="For delivery questions." data-placement="right"><i class="icon-question-circle"></i></span>
+                                    </div><!-- End .form-control-tooltip -->
+                                  </div><!-- End .form-group -->
+                                  <div class="text-center mb-4 mt-4">
+                                    <button type="submit" class="btn btn-primary">Register</button>
+                                  </div>
                                 </form>
+                              </template>
+
+                              <template v-else>
+                                  <div class="form-group-custom-control">
+                                    <div class="custom-control custom-checkbox">
+                                      <input type="checkbox" class="custom-control-input" id="change-bill-address" value="1">
+                                      <label class="custom-control-label" for="change-bill-address">My billing and shipping address are the same</label>
+                                    </div><!-- End .custom-checkbox -->
+                                  </div><!-- End .form-group -->
+
+                                  <div id="checkout-shipping-address">
+                                    <address>
+                                      {{ isLoggedIn.address }} <br>
+                                      {{ isLoggedIn.city }} <br>
+                                      {{ isLoggedIn.state }} <br>
+                                      {{ isLoggedIn.country }} <br>
+                                      {{ isLoggedIn.phone }}
+                                    </address>
+                                  </div><!-- End #checkout-shipping-address -->
+
+
+
+                                  <div id="new-checkout-address" class="show">
+                                  <div class="alert alert-success" v-if="success">
+                                    <button class="close" type="button" data-dismiss="alert" aria-hidden="true">&#215;</button>
+                                    Update is Successful
+                                  </div>
+
+                                  <div class="alert alert-warning alert-dismissible fade show" role="alert" v-if="errors.msg">
+                                    {{ errors.msg }}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <h2>UPDATE INFORMATION</h2>
+                                  <form @submit.prevent="updateUser">
+                                    <div class="form-group required-field">
+                                      <label>Full Name </label>
+                                      <input type="text" class="form-control" v-model="userData.full_name" name="full_name">
+                                    </div><!-- End .form-group -->
+                                    <div class="form-group required-field">
+                                      <label>Email </label>
+                                      <input type="email" class="form-control" v-model="userData.email" name="email" disabled>
+                                    </div><!-- End .form-group -->
+                                    <div class="form-group required-field">
+                                      <label>Street Address </label>
+                                      <textarea cols="30" rows="5" id="bodyMessage" class="form-control" v-model="userData.address" name="address"></textarea>
+                                    </div><!-- End .form-group -->
+
+                                    <div class="form-group required-field">
+                                      <label>City  </label>
+                                      <input type="text" class="form-control" v-model="userData.city" name="city">
+                                    </div><!-- End .form-group -->
+
+                                    <div class="form-group required-field">
+                                      <label>State  </label>
+                                      <input type="text" class="form-control" v-model="userData.state" name="state">
+                                    </div><!-- End .form-group -->
+
+                                    <div class="form-group required-field">
+                                      <label>Country  </label>
+                                      <input type="text" class="form-control" v-model="userData.country" name="country">
+                                    </div><!-- End .form-group -->
+
+
+                                    <div class="form-group required-field">
+                                      <label>Phone Number </label>
+                                      <div class="form-control-tooltip">
+                                        <input type="text" class="form-control" name="phone" v-model="userData.phone">
+                                        <span class="input-tooltip" data-toggle="tooltip" title="For delivery questions." data-placement="right"><i class="icon-question-circle"></i></span>
+                                      </div><!-- End .form-control-tooltip -->
+                                    </div><!-- End .form-group -->
+                                    <div class="form-group-custom-control">
+                                      <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="address-save">
+                                        <label class="custom-control-label" for="address-save">I agree for my address information to be updated</label>
+                                      </div><!-- End .custom-checkbox -->
+                                    </div><!-- End .form-group -->
+                                    <div class="text-center mb-4 mt-4">
+                                      <input type="submit" name="submit" class="btn btn-primary" value="Update">
+
+                                    </div>
+                                  </form>
+                                </div><!-- End #new-checkout-address -->
+                              </template>
+
                             </li><br/>
 
                             <li>
@@ -150,8 +230,8 @@
                                                 <td>Flat Rate</td>
                                             </tr>
 
-                                        
-                                        
+
+
                                             <!-- <tr>
                                                 <td><input type="radio" name="shippingMethod" v-model="shippingMethod" v-bind:value="'1500'"></td>
                                                 <td><strong>N1500.00</strong></td>
@@ -194,8 +274,8 @@
                                             <td class="price-col">N{{ item.price }}</td>
                                         </tr>
                                         <td class="price-col">TOTAL: N{{ total }}</td>
-                                      
-                                    </tbody>    
+
+                                    </tbody>
                                 </table>
                             </div><!-- End #order-cart-section -->
                         </div><!-- End .order-summary -->
@@ -217,7 +297,7 @@
 </template>
 <script>
 import {login} from '../../../helpers/auth';
- import {userRegUrl} from '../../../config';
+import {update, userRegUrl} from '../../../config';
  import {getGroups} from '../../../config'
   import {getCategories} from '../../../config'
   import { getProducts } from '../../../config'
@@ -229,7 +309,7 @@ export default {
 				email:'',
 				password:''
             },
-              userData: {
+              newUserData: {
                 full_name : '',
                 email: '',
                 password: '',
@@ -240,6 +320,17 @@ export default {
                 phone: ''
 
             },
+
+	        userData: {
+		        full_name : this.$store.state.currentUser ? this.$store.state.currentUser.full_name : "",
+		        email: this.$store.state.currentUser ? this.$store.state.currentUser.email : "",
+		        country: this.$store.state.currentUser ? this.$store.state.currentUser.country : "",
+		        state: this.$store.state.currentUser ? this.$store.state.currentUser.state : "",
+		        city: this.$store.state.currentUser ? this.$store.state.currentUser.city : "",
+		        address: this.$store.state.currentUser ? this.$store.state.currentUser.address : "",
+		        phone: this.$store.state.currentUser ? this.$store.state.currentUser.phone: ""
+	        },
+
 			error:null,
             products: {},
             groups: {},
@@ -252,7 +343,7 @@ export default {
      computed : {
        isLoggedIn : function(){ return this.$store.getters.currentUser},
       cartCount : function(){ return this.$store.getters.getCart},
-      total () { 
+      total () {
                let cart = JSON.parse(localStorage.getItem('cart')) || [];
             //for new addition to cart
             if(cart.length > 0){
@@ -318,7 +409,7 @@ export default {
             }else{
                 let it = cart.find(it => {
                     return it.id === item.id;
-                }); 
+                });
                  if(it){
                     it.qty++;
                     it.subtotal = it.price * it.qty
@@ -328,7 +419,7 @@ export default {
             }else{
 
             }
-           
+
             }
         },
         decrement(item){
@@ -350,7 +441,7 @@ export default {
             }else{
                 let it = cart.find(it => {
                     return it.id === item.id;
-                }); 
+                });
                  if(it){
                     it.qty--;
                     it.subtotal = it.price * it.qty
@@ -360,7 +451,7 @@ export default {
             }else{
 
             }
-           
+
             }
         },
       clearCart: function () {
@@ -369,7 +460,7 @@ export default {
           this.$router.push('/')
         })
       },
-     
+
       	authenticate(){
 			this.$store.dispatch("login");
 
@@ -385,18 +476,18 @@ export default {
                 //this.$router.push({path:'/home'})
                  window.location = '/home'
                     }
-				
+
 			})
 			.catch((error)=>{
 				this.$store.commit("loginFailed",{error});
 			})
         },
           signup(){
-                    this.$http.post(userRegUrl, this.userData)
+                    this.$http.post(userRegUrl, this.newUserData)
                     .then(data => {
                         this.success = true;
-                       // this.userData = {};
-                        
+                       // this.newUserData = {};
+
                        // this.$router.push({name:'Login'})
                         })
                     .catch(err => {
@@ -405,17 +496,28 @@ export default {
                     });
                 },
                  resend(){
-                this.$http.post(resend,{email: this.userData.email})
+                this.$http.post(resend,{email: this.newUserData.email})
                 .then(data => {
                          alert('We sent a verification email to you. Please check your email to confirm your account and complete your account creation process.')
                         })
                     .catch(err => {
                         this.errors = err.response.data || {};
                     });
-            }
-            
+            },
 
-      
+            updateUser(){
+              this.$http.patch(update + this.isLoggedIn._id, this.userData)
+              .then(data => {
+                this.success = true;
+                this.userData = {};
+              })
+              .catch(err => {
+                this.errors = err.response || {}
+              });
+            },
+
+
+
     }
 }
 

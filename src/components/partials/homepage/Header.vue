@@ -105,7 +105,7 @@
                                     </div><!-- End .dropdown-cart-total -->
 
                                     <div class="dropdown-cart-action">
-                                        <router-link to="/checkout-shipping" class="btn btn-block" v-if="cartCount.length > 0">Checkout</router-link>
+                                        <a href="/checkout-shipping" class="btn btn-block" v-if="cartCount.length > 0">Checkout</a>
                                     </div><!-- End .dropdown-cart-total -->
                                 </div><!-- End .dropdownmenu-wrapper -->
                             </div><!-- End .dropdown-menu -->
@@ -158,7 +158,7 @@
                                     </div><!-- End .dropdown-cart-total -->
 
                                     <div class="dropdown-cart-action">
-                                                 <router-link to="/checkout-shipping" class="btn btn-block" v-if="cartCount.length > 0">Checkout</router-link>
+                                                 <a href="/checkout-shipping" class="btn btn-block" v-if="cartCount.length > 0">Checkout</a>
                                   </div><!-- End .dropdown-cart-total -->
                                 </div><!-- End .dropdownmenu-wrapper -->
                             </div><!-- End .dropdown-menu -->
@@ -167,7 +167,7 @@
                         <ul class="menu sf-arrows sf-js-enabled" style="touch-action: pan-y;">
                             <li :class="this.$route.path === '/home' ? 'active' : ''"><a href="/home">Home</a></li>
                            <li :class="this.$route.path === '/account/register' ? 'active' : ''"><a href="/account/register">Register</a></li>
-                           <li :class="this.$route.path === '/auth/login' ? 'active' : ''"><a href="/auth/login">Login</a></li>
+                           <li :class="this.$route.path === '/auth/login' ? 'active' : ''" v-show="!isLoggedIn"><a href="/auth/login">Login</a></li>
                              <li :class="this.$route.path === '/contact' ? 'active' : ''"><a href="/contact">Contact</a></li>
                             <!--<li class="float-right"><a href="/auth/login">Login</a></li>
                             <li class="float-right"><a href="/contact">Contact</a></li> -->

@@ -1,14 +1,13 @@
 <template>
     <div>
          <main class="main">
-            <nav aria-label="breadcrumb" class="breadcrumb-nav">
-                <div class="container">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="/"><i class="icon-home"></i></a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Checkout</li>
-                    </ol>
-                </div><!-- End .container -->
-            </nav>
+           <nav aria-label="breadcrumb" class="breadcrumb-nav pb-3">
+             <div class="container">
+               <ol class="breadcrumb">
+                 <li class="breadcrumb-item ml-0"><a href="/checkout-shipping" style="font-size: 16px"><i class="icon-chevron-left" style="font-size: medium"></i> <span style="padding-top: 20px">Go back</span></a></li>
+               </ol>
+             </div><!-- End .container -->
+           </nav>
 
             <div class="container">
                 <ul class="checkout-progress-bar">
@@ -49,8 +48,8 @@
                                             <td class="price-col">N{{ item.price }}</td>
                                         </tr>
                                         <td class="price-col">TOTAL: N{{ total }}</td>
-                                      
-                                    </tbody>    
+
+                                    </tbody>
                                 </table>
                             </div><!-- End #order-cart-section -->
                         </div><!-- End .order-summary -->
@@ -82,114 +81,28 @@
                         <div class="checkout-payment">
                             <h2 class="step-title">Payment Method:</h2>
 
-                            <h4>Check / Money order</h4>
-                            
-                            <div class="form-group-custom-control">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="change-bill-address" value="1">
-                                    <label class="custom-control-label" for="change-bill-address">My billing and shipping address are the same</label>
-                                </div><!-- End .custom-checkbox -->
-                            </div><!-- End .form-group -->
-
-                            <div id="checkout-shipping-address">
-                                <address>
-                                    {{ isLoggedIn.address }} <br>
-                                    {{ isLoggedIn.city }} <br>
-                                    {{ isLoggedIn.state }} <br>
-                                    {{ isLoggedIn.country }} <br>
-                                    {{ isLoggedIn.phone }}
-                                </address>
-                            </div><!-- End #checkout-shipping-address -->
-
-                          
-
-                            <div id="new-checkout-address" class="show">
-                                <div class="alert alert-success" v-if="success">
-                                   <button class="close" type="button" data-dismiss="alert" aria-hidden="true">&#215;</button>
-                                  Update is Successful
-                               </div>
-
-                                 <div class="alert alert-warning alert-dismissible fade show" role="alert" v-if="errors.msg">
-		            			{{ errors.msg }}
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-		            			  <span aria-hidden="true">&times;</span>
-		            			</button>
-                                </div>
-                                  <h2>UPDATE INFORMATION</h2>
-                                <form @submit.prevent="updateUser">
-                                    <div class="form-group required-field">
-                                        <label>Full Name </label>
-                                        <input type="text" class="form-control" v-model="userData.full_name" name="full_name">
-                                    </div><!-- End .form-group -->
-                           <div class="form-group required-field">
-                                        <label>Email </label>
-                                        <input type="email" class="form-control" v-model="userData.email" name="email" disabled>
-                                    </div><!-- End .form-group -->
-                                              <div class="form-group required-field">
-                                        <label>Street Address </label>
-                                <textarea cols="30" rows="5" id="bodyMessage" class="form-control" v-model="userData.address" name="address"></textarea>
-                                    </div><!-- End .form-group -->
-
-                                    <div class="form-group required-field">
-                                        <label>City  </label>
-                                        <input type="text" class="form-control" v-model="userData.city" name="city">
-                                    </div><!-- End .form-group -->
-
-                                     <div class="form-group required-field">
-                                        <label>State  </label>
-                                        <input type="text" class="form-control" v-model="userData.state" name="state">
-                                    </div><!-- End .form-group -->
-
-                                     <div class="form-group required-field">
-                                        <label>Country  </label>
-                                        <input type="text" class="form-control" v-model="userData.country" name="country">
-                                    </div><!-- End .form-group -->
-
-                    
-                                    <div class="form-group required-field">
-                                        <label>Phone Number </label>
-                                        <div class="form-control-tooltip">
-                                            <input type="text" class="form-control" name="phone" v-model="userData.phone">
-                                            <span class="input-tooltip" data-toggle="tooltip" title="For delivery questions." data-placement="right"><i class="icon-question-circle"></i></span>
-                                        </div><!-- End .form-control-tooltip -->
-                                    </div><!-- End .form-group -->
-                                    <div class="form-group-custom-control">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="address-save">
-                                            <label class="custom-control-label" for="address-save">I agree for my address information to be updated</label>
-                                        </div><!-- End .custom-checkbox -->
-                                    </div><!-- End .form-group -->
-                                    <div class="text-center mb-4 mt-4">
-                                        <input type="submit" name="submit" class="btn btn-primary" value="Update">
-                            
-                                    </div>
-                                </form>
-                            </div><!-- End #new-checkout-address -->
-
-
                         </div><!-- End .checkout-payment -->
 
                         <div class="checkout-discount">
-                            
+
                              <div>
-                                  <h2>PAYMENT INFORMATION</h2>
-                              
+
                                     <div class="form-group required-field">
-                                        <label>Pay On Delivery</label>
-                                      <input type="radio" name="paymentMethod"  v-model="paymentMethod" v-bind:value="'Pay On Delivery'" checked>
-                                     </div><!-- End .form-group -->
+                                      <input type="radio" name="paymentMethod" id="onDelivery"  v-model="paymentMethod" v-bind:value="'Pay On Delivery'" checked>
+                                      <label for="onDelivery"> Pay On Delivery</label>
+                                    </div><!-- End .form-group -->
                                     <div class="form-group required-field">
-                                        <label>Pay Online</label>
-                                      <input type="radio" name="paymentMethod" v-model="paymentMethod" v-bind:value="'Pay Online'">
+                                      <input type="radio" name="paymentMethod" id="payOnline" v-model="paymentMethod" v-bind:value="'Pay Online'">
+                                      <label for="payOnline"> Pay Online</label>
                                     </div><!-- End .form-group -->
                             </div><!-- End #new-checkout-address -->
 
 
 <div class="clearfix">
-    <input type="hidden" name="cart" v-model="orderDetailsWithout.cart"> 
-    <input type="hidden" name="user"  v-model="orderDetailsWithout.user"> 
-    <input type="hidden" name="status" v-model="orderDetailsWithout.cart"> 
-    <input type="hidden" name="email"  v-model="orderDetailsWithout.email"> 
+    <input type="hidden" name="cart" v-model="orderDetailsWithout.cart">
+    <input type="hidden" name="user"  v-model="orderDetailsWithout.user">
+    <input type="hidden" name="status" v-model="orderDetailsWithout.cart">
+    <input type="hidden" name="email"  v-model="orderDetailsWithout.email">
     <button v-if="paymentMethod === 'Pay On Delivery'" class="btn btn-primary float-right" @click="orderWithout">Place Order</button>
 </div>
 
@@ -205,16 +118,16 @@
         class="btn btn-primary float-right"
     >
        <i class="fas fa-money-bill-alt"></i>
-       <span class="btn btn-primary float-right">Place Order</span>
+       <span>Place Order</span>
     </paystack>
-     <input type="hidden" name="cart" v-model="orderDetails.cart"> 
-    <input type="hidden" name="reference" v-model="orderDetails.reference"> 
-    <input type="hidden" name="user"  v-model="orderDetails.user"> 
+     <input type="hidden" name="cart" v-model="orderDetails.cart">
+    <input type="hidden" name="reference" v-model="orderDetails.reference">
+    <input type="hidden" name="user"  v-model="orderDetails.user">
     <input type="hidden" name="status" v-model="orderDetails.status">
-    <input type="hidden" name="email1"  v-model="orderDetails.email1">  
+    <input type="hidden" name="email1"  v-model="orderDetails.email1">
 </div>
 
-                            
+
                         </div><!-- End .checkout-discount -->
                     </div><!-- End .col-lg-8 -->
                 </div><!-- End .row -->
@@ -281,7 +194,7 @@ export default {
      computed : {
        isLoggedIn : function(){ return this.$store.getters.currentUser},
       cartCount : function(){ return this.$store.getters.getCart},
-      total () { 
+      total () {
                let cart = JSON.parse(localStorage.getItem('cart')) || [];
             //for new addition to cart
             if(cart.length > 0){
@@ -302,7 +215,7 @@ export default {
       },
       diff() {
           var a = parseInt(this.total);
-          var b = parseInt(this.sum); 
+          var b = parseInt(this.sum);
           var c = b - a;
           return c;
       },
@@ -317,16 +230,16 @@ export default {
       }
     },
     created () {
-   
+
     },
     methods: {
        clearCart: function () {
         this.$store.dispatch('clearCart')
         .then(() => {
-          this.$router.push('/')
+        	window.location.href = "/"
         })
       },
-    
+
       updateUser(){
           this.$http.patch(update + this.isLoggedIn._id, this.userData)
           .then(data => {
@@ -337,14 +250,7 @@ export default {
                 this.errors = err.response || {}
           });
       },
-      
-      clearCart: function () {
-        this.$store.dispatch('clearCart')
-        .then(() => {
-         this.$router.push({path: '/cart'});
-        })
-      },
-         
+
                callback() {
                    this.$http.put(payWithPaystack, this.orderDetails)
                    .then(response => {
@@ -353,7 +259,7 @@ export default {
                    })
                    .catch(err => {
                         console.log(err.response.data)
-                        this.errors = err.response.data || {}; 
+                        this.errors = err.response.data || {};
                    });
                },
 
@@ -367,16 +273,16 @@ export default {
                    .then(response => {
                        alert('Order Has been placed.');
                         this.clearCart();
-                      
+
                    })
                    .catch(err => {
                         console.log(err.response)
-                        this.errors = err.response || {}; 
+                        this.errors = err.response || {};
                    });
                },
-            
 
-      
+
+
     }
 }
 

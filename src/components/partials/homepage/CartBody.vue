@@ -120,7 +120,7 @@
                             </table>
 
                             <div class="checkout-methods">
-                                <router-link to="/checkout-shipping" class="btn btn-block btn-sm btn-primary">Go to Checkout</router-link>
+                                <a href="/checkout-shipping" class="btn btn-block btn-sm btn-primary">Go to Checkout</a>
                             </div><!-- End .checkout-methods -->
                         </div><!-- End .cart-summary -->
                     </div><!-- End .col-lg-4 -->
