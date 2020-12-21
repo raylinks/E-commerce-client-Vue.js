@@ -55,7 +55,7 @@
 
 		            		</div>
                             <div class="alert alert-warning alert-dismissible fade show" role="alert" v-if="submitted">
-                                    New Collection Added Successfully
+                                    New Collection Added gotten Successfully
 		            			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 		            			  <span aria-hidden="true">&times;</span>
 		            			</button>
